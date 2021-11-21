@@ -26,7 +26,7 @@ from utils.general import (
 )
 from utils.loss import compute_loss
 from utils.metrics import ap_per_class, ConfusionMatrix
-from utils.plots import plot_images, output_to_target
+from utils.plots import plot_images, output_to_target, plot_study_txt
 from utils.torch_utils import select_device, time_synchronized
 
 
@@ -146,9 +146,6 @@ def test(
         img /= 255.0  # 0 - 255 to 0.0 - 1.0
         targets = targets.to(device)
         nb, _, height, width = img.shape  # batch size, channels, height, width
-        targets[:, 2:] *= torch.Tensor(
-            [width, height, width, height]
-        ).to(device)
 
         with torch.no_grad():
             # Run model
@@ -166,12 +163,15 @@ def test(
                 )[1][:3]  # box, obj, cls
 
             # Run NMS
-            t = time_synchronized()
+            targets[:, 2:] *= torch.Tensor(
+                [width, height, width, height]
+            ).to(device)  # to pixels
             lb = (
                 [
                     targets[targets[:, 0] == i, 1:]
                     for i in range(nb)] if save_txt else []
             )  # for autolabelling
+            t = time_synchronized()
             output = non_max_suppression(
                 inf_out, conf_thres=conf_thres, iou_thres=iou_thres, labels=lb
             )
@@ -545,8 +545,9 @@ if __name__ == "__main__":
                     opt.conf_thres,
                     opt.iou_thres,
                     opt.save_json,
+                    plots=False
                 )
                 y.append(r + t)  # results and times
             np.savetxt(f, y, fmt="%10.4g")  # save
         os.system("zip -r study.zip study_*.txt")
-        # utils.plots.plot_study_txt(f, x)  # plot
+        plot_study_txt(f, x)  # plot

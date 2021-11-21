@@ -3,7 +3,7 @@ import cv2
 import json
 
 image_path = "data/svhn/test/"
-label_path = "runs/detect/exp16/labels/"
+label_path = "runs/detect/exp2/labels/"
 img_list = os.listdir(image_path)
 img_list = sorted(img_list, key=lambda x: int(os.path.splitext(x)[0]))
 file_len = len(img_list)
@@ -25,7 +25,7 @@ for i in range(len(imgnames)):
         for content in contents:
             content = content.replace("\n", "")
             c = content.split(" ")
-            if float(c[5]) > 0.05:
+            if float(c[5]) > 0:
                 w_center = w * float(c[1])
                 h_center = h * float(c[2])
                 width = w * float(c[3])
@@ -45,7 +45,7 @@ for i in range(len(imgnames)):
                     "bbox": bbox,
                 }
                 data.append(k)
-    f.close()
+        f.close()
 
 with open("answer.json", "w") as outfile:
     json.dump(data, outfile, indent=4)

@@ -1,8 +1,11 @@
-"""File for accessing YOLOv5 via PyTorch Hub https://pytorch.org/hub/
+"""
+File for accessing YOLOv5 via PyTorch Hub https://pytorch.org/hub/
 
 Usage:
-    import torch
-    model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True, channels=3, classes=80)
+import torch
+model = torch.hub.load(
+    'ultralytics/yolov5', 'yolov5s', pretrained=True, channels=3, classes=80
+)
 """
 
 from pathlib import Path
@@ -29,7 +32,8 @@ def create(name, pretrained, channels, classes):
     Returns:
         pytorch model
     """
-    config = Path(__file__).parent / "models" / f"{name}.yaml"  # model.yaml path
+    config = Path(__file__).parent / "models" / f"{name}.yaml"
+    # model.yaml path
     try:
         model = Model(config, channels, classes)
         if pretrained:
@@ -51,7 +55,8 @@ def create(name, pretrained, channels, classes):
     except Exception as e:
         help_url = "https://github.com/ultralytics/yolov5/issues/36"
         s = (
-            "Cache maybe be out of date, try force_reload=True. See %s for help."
+            "Cache maybe be out of date, try force_reload=True. \
+            See %s for help."
             % help_url
         )
         raise Exception(s) from e
@@ -61,9 +66,9 @@ def yolov5s(pretrained=False, channels=3, classes=80):
     """YOLOv5-small model from https://github.com/ultralytics/yolov5
 
     Arguments:
-        pretrained (bool): load pretrained weights into the model, default=False
-        channels (int): number of input channels, default=3
-        classes (int): number of model classes, default=80
+        pretrained(bool): load pretrained weights into the model, default=False
+        channels(int): number of input channels, default=3
+        classes(int): number of model classes, default=80
 
     Returns:
         pytorch model
@@ -75,7 +80,8 @@ def yolov5m(pretrained=False, channels=3, classes=80):
     """YOLOv5-medium model from https://github.com/ultralytics/yolov5
 
     Arguments:
-        pretrained (bool): load pretrained weights into the model, default=False
+        pretrained (bool): load pretrained weights into the model,
+        default=False
         channels (int): number of input channels, default=3
         classes (int): number of model classes, default=80
 
@@ -89,7 +95,8 @@ def yolov5l(pretrained=False, channels=3, classes=80):
     """YOLOv5-large model from https://github.com/ultralytics/yolov5
 
     Arguments:
-        pretrained (bool): load pretrained weights into the model, default=False
+        pretrained (bool): load pretrained weights into the model,
+        default=False
         channels (int): number of input channels, default=3
         classes (int): number of model classes, default=80
 
@@ -103,7 +110,8 @@ def yolov5x(pretrained=False, channels=3, classes=80):
     """YOLOv5-xlarge model from https://github.com/ultralytics/yolov5
 
     Arguments:
-        pretrained (bool): load pretrained weights into the model, default=False
+        pretrained (bool): load pretrained weights into the model,
+        default=False
         channels (int): number of input channels, default=3
         classes (int): number of model classes, default=80
 
@@ -114,7 +122,12 @@ def yolov5x(pretrained=False, channels=3, classes=80):
 
 
 if __name__ == "__main__":
-    model = create(name="yolov5s", pretrained=True, channels=3, classes=80)  # example
+    model = create(
+        name="yolov5s",
+        pretrained=True,
+        channels=3,
+        classes=80
+    )  # example
     model = model.fuse().autoshape()  # for PIL/cv2/np inputs and NMS
 
     # Verify inference
