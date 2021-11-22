@@ -3,7 +3,7 @@ import cv2
 import json
 
 image_path = "data/svhn/test/"
-label_path = "runs/detect/exp2/labels/"
+label_path = "runs/detect/exp/labels/"
 img_list = os.listdir(image_path)
 img_list = sorted(img_list, key=lambda x: int(os.path.splitext(x)[0]))
 file_len = len(img_list)
