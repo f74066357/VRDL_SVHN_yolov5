@@ -60,3 +60,6 @@ python predict.py
 ```
 * remember to modify 'detect-path' and 'score' (default:0) in code 
 
+## Colab link
+run inferene and bench mark and generating submission file
+https://colab.research.google.com/drive/1O15T8mucMoTuJ2d3qc2TWErEhDZBSQcc?usp=sharing
