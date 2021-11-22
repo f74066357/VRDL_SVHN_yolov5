@@ -25,26 +25,25 @@ for i in range(len(imgnames)):
         for content in contents:
             content = content.replace("\n", "")
             c = content.split(" ")
-            if float(c[5]) > 0:
-                w_center = w * float(c[1])
-                h_center = h * float(c[2])
-                width = w * float(c[3])
-                height = h * float(c[4])
-                left = int(w_center - width / 2)
-                top = int(h_center - height / 2)
+            w_center = w * float(c[1])
+            h_center = h * float(c[2])
+            width = w * float(c[3])
+            height = h * float(c[4])
+            left = int(w_center - width / 2)
+            top = int(h_center - height / 2)
 
-                category_id = int(c[0])
-                image_id = int(imgnames[i])
-                bbox = [left, top, width, height]
-                score = float(c[5])
-                k = {}
-                k = {
-                    "image_id": image_id,
-                    "score": score,
-                    "category_id": category_id,
-                    "bbox": bbox,
-                }
-                data.append(k)
+            category_id = int(c[0])
+            image_id = int(imgnames[i])
+            bbox = [left, top, width, height]
+            score = float(c[5])
+            k = {}
+            k = {
+                "image_id": image_id,
+                "score": score,
+                "category_id": category_id,
+                "bbox": bbox,
+            }
+            data.append(k)
         f.close()
 
 with open("answer.json", "w") as outfile:
