@@ -66,3 +66,7 @@ https://drive.google.com/file/d/18qZEDDLE6-Jg4Iu8OtzEQ5N61He5XExK/view?usp=shari
 ## Colab link
 run inferene and bench mark and generating submission file
 https://colab.research.google.com/drive/1O15T8mucMoTuJ2d3qc2TWErEhDZBSQcc?usp=sharing
+
+## Reference
+* https://github.com/ultralytics/yolov5
+* https://github.com/chia56028/Street-View-House-Numbers-Detection
