@@ -58,7 +58,7 @@ EX: python detect.py --source data/svhn/test/ --weights runs/train/exp18/weights
 ```
 python predict.py
 ```
-* remember to modify 'detect-path' and 'score' (default:0) in code 
+* remember to modify 'detect-path'
 
 ## My training weight
 https://drive.google.com/file/d/18qZEDDLE6-Jg4Iu8OtzEQ5N61He5XExK/view?usp=sharing
